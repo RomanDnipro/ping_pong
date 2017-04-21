@@ -11,16 +11,18 @@ public class Player extends Thread {
     }
 
     public void startPlay() throws InterruptedException {
-        synchronized (ball){
+
             while (true) {
+                ball.gotBall();
                 sleep(timelnMillis);
                 System.out.println(word);
+                ball.returnBall();
             }
-        }
+
     }
 
     @Override
-    public synchronized void start() {
+    public void run() {
         try {
             this.startPlay();
         } catch (InterruptedException e) {
