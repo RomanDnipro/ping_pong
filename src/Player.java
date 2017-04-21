@@ -10,7 +10,21 @@ public class Player extends Thread {
         this.word = word;
     }
 
-    public void startPlay(){
+    public void startPlay() throws InterruptedException {
+        synchronized (ball){
+            while (true) {
+                sleep(timelnMillis);
+                System.out.println(word);
+            }
+        }
+    }
 
+    @Override
+    public synchronized void start() {
+        try {
+            this.startPlay();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
